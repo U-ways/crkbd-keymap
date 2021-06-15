@@ -32,53 +32,53 @@ enum layers {
 #define RAISE MO(_RAISE)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-	[_BASE] = LAYOUT_split_3x6_3(
+    [_BASE] = LAYOUT_split_3x6_3(
         //-------|---------|---------|---------|---------|-------\\     //-------|---------|---------|---------|---------|-------
-		KC_TAB   , KC_SCLN , KC_COMM , KC_DOT  , KC_P    , KC_Y   ,     KC_F     , KC_G    , KC_C    , KC_R    , KC_L    , KC_ESC,
+        KC_TAB   , KC_SCLN , KC_COMM , KC_DOT  , KC_P    , KC_Y   ,     KC_F     , KC_G    , KC_C    , KC_R    , KC_L    , KC_ESC,
         //-------|---------|---------|---------|---------|-------\\     //-------|---------|---------|---------|---------|-------
         KC_BSPC  , KC_A    , KC_O    , KC_E    , KC_U    , KC_I   ,     KC_D     , KC_H    , KC_T    , KC_N    , KC_S    , KC_ENT,
         //-------|---------|---------|---------|---------|-------\\     //-------|---------|---------|---------|---------|-------
-		KC_LSFT  , KC_QUOT , KC_Q    , KC_J    , KC_K    , KC_X   ,     KC_B     , KC_M    , KC_W    , KC_V    , KC_Z    , KC_LGUI,
+        KC_LSFT  , KC_QUOT , KC_Q    , KC_J    , KC_K    , KC_X   ,     KC_B     , KC_M    , KC_W    , KC_V    , KC_Z    , KC_LGUI,
         //-------|---------|---------|---------|---------|-------\\     //-------|---------|---------|---------|---------|-------
-		                               KC_LALT , LOWER   , KC_SPC ,     KC_SPC   , RAISE   , KC_LCTL
+                                    KC_LALT    , LOWER   , KC_SPC ,     KC_SPC   , RAISE   , KC_LCTL
                                     //---------|---------|-------\\     //-------|---------|----------
-	),
-	
-	[_LOWER] = LAYOUT_split_3x6_3(
+    ),
+ 
+    [_LOWER] = LAYOUT_split_3x6_3(
         //-------|---------|---------|---------|---------|-------\\     //-------|---------|---------|---------|---------|-------
-		KC_TRNS  , PND_SYM , KC_LBRC , KC_RBRC , KC_BSLS , KC_NO  ,     KC_NO    , KC_SLSH , KC_7    , KC_8    , KC_9    , KC_0,
-        //-------|---------|---------|---------|---------|-------\\     //-------|---------|---------|---------|---------|-------		
-		KC_TRNS  , KC_UNDS , KC_LPRN , KC_RPRN , KC_EQL  , KC_TILD,     KC_GRV   , KC_PLUS , KC_4    , KC_5    , KC_6    , KC_TRNS,
+        KC_TRNS  , PND_SYM , KC_LBRC , KC_RBRC , KC_BSLS , KC_NO  ,     KC_NO    , KC_SLSH , KC_7    , KC_8    , KC_9    , KC_0,
+        //-------|---------|---------|---------|---------|-------\\     //-------|---------|---------|---------|---------|-------  
+        KC_TRNS  , KC_UNDS , KC_LPRN , KC_RPRN , KC_EQL  , KC_TILD,     KC_GRV   , KC_PLUS , KC_4    , KC_5    , KC_6    , KC_TRNS,
         //-------|---------|---------|---------|---------|-------\\     //-------|---------|---------|---------|---------|-------
-		KC_TRNS  , KC_PIPE , KC_LCBR , KC_RCBR , KC_QUES , KC_NO  ,     KC_NO    , KC_MINS , KC_1    , KC_2    , KC_3    , KC_TRNS,
+        KC_TRNS  , KC_PIPE , KC_LCBR , KC_RCBR , KC_QUES , KC_NO  ,     KC_NO    , KC_MINS , KC_1    , KC_2    , KC_3    , KC_TRNS,
         //-------|---------|---------|---------|---------|-------\\     //-------|---------|---------|---------|---------|-------
-		                               KC_TRNS , KC_TRNS , KC_TRNS,     KC_TRNS  , KC_TRNS , KC_TRNS
+                                    KC_TRNS    , KC_TRNS , KC_TRNS,     KC_TRNS  , KC_TRNS , KC_TRNS
                                     //---------|---------|-------\\     //-------|---------|----------
-	),
-	
-	[_RAISE] = LAYOUT_split_3x6_3(
+    ),
+ 
+    [_RAISE] = LAYOUT_split_3x6_3(
         //-------|---------|---------|---------|---------|-------\\     //-------|---------|---------|---------|---------|-------
-	    KC_TRNS  , KC_APP  , KC_HOME , KC_UP   , KC_END  , KC_PGUP,     LCTL(KC_F),LCTL(KC_X),LCTL(KC_C),LCTL(KC_V),LCTL(KC_L),KC_ESC,
+        KC_TRNS  , KC_APP  , KC_HOME , KC_UP   , KC_END  , KC_PGUP,     LCTL(KC_F),LCTL(KC_X),LCTL(KC_C),LCTL(KC_V),LCTL(KC_L),KC_ESC,
         //-------|---------|---------|---------|---------|-------\\     //-------|---------|---------|---------|---------|-------
-		KC_TRNS ,LCTL(KC_A), KC_LEFT , KC_DOWN , KC_RGHT , KC_PGDN,     LCTL(KC_D), KC_LSFT, KC_LCTL , KC_LALT,TD(TD_INS_COLMOD), KC_TRNS,
+        KC_TRNS ,LCTL(KC_A), KC_LEFT , KC_DOWN , KC_RGHT , KC_PGDN,     LCTL(KC_D), KC_LSFT, KC_LCTL , KC_LALT,TD(TD_INS_COLMOD), KC_TRNS,
         //-------|---------|---------|---------|---------|-------\\     //-------|---------|---------|---------|---------|-------
-		KC_TRNS ,LCTL(KC_G),LCTL(KC_Q),LALT(KC_J),LCTL(KC_K),KC_NO,     LCTL(KC_B),KC_DEL, LCTL(KC_W),LCTL(LSFT(KC_Z)), LCTL(KC_Z), KC_TRNS,
+        KC_TRNS ,LCTL(KC_G),LCTL(KC_Q),LALT(KC_J),LCTL(KC_K),KC_NO,     LCTL(KC_B),KC_DEL, LCTL(KC_W),LCTL(LSFT(KC_Z)), LCTL(KC_Z), KC_TRNS,
         //-------|---------|---------|---------|---------|-------\\     //-------|---------|---------|---------|---------|-------
-		                               KC_TRNS , KC_TRNS , KC_TRNS,     KC_TRNS  , KC_TRNS , KC_TRNS
+                                    KC_TRNS    , KC_TRNS , KC_TRNS,     KC_TRNS  , KC_TRNS , KC_TRNS
                                     //---------|---------|-------\\     //-------|---------|----------
-	),
-	
-	[_ADJUST] = LAYOUT_split_3x6_3(
+    ),
+ 
+    [_ADJUST] = LAYOUT_split_3x6_3(
         //-------|---------|---------|---------|---------|-------\\     //-------|---------|---------|---------|---------|-------
-		KC_TRNS  , KC_NO   , KC_NO   , KC_MS_U , KC_NO   , KC_NO,       KC_NO    , KC_WH_U , KC_BTN2 , KC_ACL0 , KC_NO   , KC_TRNS, 
-        //-------|---------|---------|---------|---------|-------\\     //-------|---------|---------|---------|---------|-------		
-		KC_TRNS  , KC_NO   , KC_MS_L , KC_MS_D , KC_MS_R , TD(TD_F11),  TD(TD_F12), KC_WH_D, KC_BTN1 , KC_ACL2 , KC_NO   , KC_TRNS,
-        //-------|---------|---------|---------|---------|-------\\     //-------|---------|---------|---------|---------|-------		
-		KC_TRNS ,TD(TD_F1),TD(TD_F2),TD(TD_F3),TD(TD_F4),TD(TD_F5),     TD(TD_F6),TD(TD_F7),TD(TD_F8),TD(TD_F9),TD(TD_F10),KC_TRNS,
+        KC_TRNS  , KC_NO   , KC_NO   , KC_MS_U , KC_NO   , KC_NO,       KC_NO    , KC_WH_U , KC_BTN2 , KC_ACL0 , KC_NO   , KC_TRNS,
+        //-------|---------|---------|---------|---------|-------\\     //-------|---------|---------|---------|---------|-------  
+        KC_TRNS  , KC_NO   , KC_MS_L , KC_MS_D , KC_MS_R , TD(TD_F11),  TD(TD_F12), KC_WH_D, KC_BTN1 , KC_ACL2 , KC_NO   , KC_TRNS,
+        //-------|---------|---------|---------|---------|-------\\     //-------|---------|---------|---------|---------|-------  
+        KC_TRNS ,TD(TD_F1),TD(TD_F2),TD(TD_F3),TD(TD_F4),TD(TD_F5),     TD(TD_F6),TD(TD_F7),TD(TD_F8),TD(TD_F9),TD(TD_F10),KC_TRNS,
         //-------|---------|---------|---------|---------|-------\\     //-------|---------|---------|---------|---------|-------
-		                               KC_TRNS , KC_TRNS , KC_TRNS,     KC_TRNS  , KC_TRNS , KC_TRNS
+                                    KC_TRNS    , KC_TRNS , KC_TRNS,     KC_TRNS  , KC_TRNS , KC_TRNS
                                     //---------|---------|-------\\     //-------|---------|----------
-	)
+    )
 };
 
 // Tri Layers :id=olkb-tri-layers
