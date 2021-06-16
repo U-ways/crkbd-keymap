@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 enum custom_keycodes {
-    PND_SYM = SAFE_RANGE
+    POUND = SAFE_RANGE
 };
 
 enum tap_dance_codes {
@@ -43,11 +43,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                     KC_LALT    , LOWER   , KC_SPC ,     KC_SPC   , RAISE   , KC_LCTL
                                     //---------|---------|-------\\     //-------|---------|----------
     ),
- 
+
     [_LOWER] = LAYOUT_split_3x6_3(
         //-------|---------|---------|---------|---------|-------\\     //-------|---------|---------|---------|---------|-------
-        KC_TRNS  , PND_SYM , KC_LBRC , KC_RBRC , KC_BSLS , KC_NO  ,     KC_NO    , KC_SLSH , KC_7    , KC_8    , KC_9    , KC_0,
-        //-------|---------|---------|---------|---------|-------\\     //-------|---------|---------|---------|---------|-------  
+        KC_TRNS  , POUND   , KC_LBRC , KC_RBRC , KC_BSLS , KC_NO  ,     KC_NO    , KC_SLSH , KC_7    , KC_8    , KC_9    , KC_0,
+        //-------|---------|---------|---------|---------|-------\\     //-------|---------|---------|---------|---------|-------
         KC_TRNS  , KC_UNDS , KC_LPRN , KC_RPRN , KC_EQL  , KC_TILD,     KC_GRV   , KC_PLUS , KC_4    , KC_5    , KC_6    , KC_TRNS,
         //-------|---------|---------|---------|---------|-------\\     //-------|---------|---------|---------|---------|-------
         KC_TRNS  , KC_PIPE , KC_LCBR , KC_RCBR , KC_QUES , KC_NO  ,     KC_NO    , KC_MINS , KC_1    , KC_2    , KC_3    , KC_TRNS,
@@ -55,7 +55,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                     KC_TRNS    , KC_TRNS , KC_TRNS,     KC_TRNS  , KC_TRNS , KC_TRNS
                                     //---------|---------|-------\\     //-------|---------|----------
     ),
- 
+
     [_RAISE] = LAYOUT_split_3x6_3(
         //-------|---------|---------|---------|---------|-------\\     //-------|---------|---------|---------|---------|-------
         KC_TRNS  , KC_APP  , KC_HOME , KC_UP   , KC_END  , KC_PGUP,     LCTL(KC_F),LCTL(KC_X),LCTL(KC_C),LCTL(KC_V),LCTL(KC_L),KC_ESC,
@@ -67,13 +67,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                     KC_TRNS    , KC_TRNS , KC_TRNS,     KC_TRNS  , KC_TRNS , KC_TRNS
                                     //---------|---------|-------\\     //-------|---------|----------
     ),
- 
+
     [_ADJUST] = LAYOUT_split_3x6_3(
         //-------|---------|---------|---------|---------|-------\\     //-------|---------|---------|---------|---------|-------
         KC_TRNS  , KC_NO   , KC_NO   , KC_MS_U , KC_NO   , KC_NO,       KC_NO    , KC_WH_U , KC_BTN2 , KC_ACL0 , KC_NO   , KC_TRNS,
-        //-------|---------|---------|---------|---------|-------\\     //-------|---------|---------|---------|---------|-------  
+        //-------|---------|---------|---------|---------|-------\\     //-------|---------|---------|---------|---------|-------
         KC_TRNS  , KC_NO   , KC_MS_L , KC_MS_D , KC_MS_R , TD(TD_F11),  TD(TD_F12), KC_WH_D, KC_BTN1 , KC_ACL2 , KC_NO   , KC_TRNS,
-        //-------|---------|---------|---------|---------|-------\\     //-------|---------|---------|---------|---------|-------  
+        //-------|---------|---------|---------|---------|-------\\     //-------|---------|---------|---------|---------|-------
         KC_TRNS ,TD(TD_F1),TD(TD_F2),TD(TD_F3),TD(TD_F4),TD(TD_F5),     TD(TD_F6),TD(TD_F7),TD(TD_F8),TD(TD_F9),TD(TD_F10),KC_TRNS,
         //-------|---------|---------|---------|---------|-------\\     //-------|---------|---------|---------|---------|-------
                                     KC_TRNS    , KC_TRNS , KC_TRNS,     KC_TRNS  , KC_TRNS , KC_TRNS
@@ -91,7 +91,7 @@ uint32_t layer_state_set_user(uint32_t state) {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case PND_SYM: if (record->event.pressed) SEND_STRING("£"); break;
+        case POUND: if (record->event.pressed) SEND_STRING(SS_RALT(SS_TAP(X_L)) SS_TAP(X_MINUS)); break;
     }
     return true;
 }
@@ -120,7 +120,7 @@ uint8_t dance_step(qk_tap_dance_state_t *state) {
     if (state->count == 1) {
         if (state->interrupted || !state->pressed) return SINGLE_TAP;
         else return SINGLE_HOLD;
-    } 
+    }
     else if (state->count == 2) {
         if (state->interrupted) return DOUBLE_SINGLE_TAP;
         else if (state->pressed) return DOUBLE_HOLD;
@@ -577,4 +577,51 @@ qk_tap_dance_action_t tap_dance_actions[] = {
     [TD_F12] = ACTION_TAP_DANCE_FN_ADVANCED(on_dance_f12, dance_f12_finished, dance_f12_reset)
 };
 
-// END of Tap Dance definitions ------------------------------------------------------
+// START of OLED definitions ------------------------------------------------------
+
+#ifdef OLED_DRIVER_ENABLE
+    #define L_BASE 0
+    #define L_LOWER 2
+    #define L_RAISE 4
+    #define L_ADJUST 8
+
+    void oled_render_layer_state(void) {
+        oled_write_P(PSTR("Layer: "), false);
+        switch (layer_state) {
+            case L_BASE:
+                oled_write_ln_P(PSTR("Default"), false);
+                break;
+            case L_LOWER:
+                oled_write_ln_P(PSTR("Lower"), false);
+                break;
+            case L_RAISE:
+                oled_write_ln_P(PSTR("Raise"), false);
+                break;
+            case L_ADJUST:
+            case L_ADJUST|L_LOWER:
+            case L_ADJUST|L_RAISE:
+            case L_ADJUST|L_LOWER|L_RAISE:
+                oled_write_ln_P(PSTR("Adjust"), false);
+                break;
+        }
+    }
+
+    void oled_task_user(void) {
+        if (is_keyboard_master()) {
+            oled_render_layer_state();
+        } else {
+            oled_write_ln_P(PSTR("U-ways"), false);
+        }
+    }
+#endif // OLED_DRIVER_ENABLE
+
+// START of RGBLIGHT definitions ------------------------------------------------------
+// See: https://docs.qmk.fm/#/feature_rgblight?id=colors
+
+#ifdef RGBLIGHT_ENABLE
+    void keyboard_post_init_user(void) {
+      rgblight_enable_noeeprom(); // Enables RGB, without saving settings
+      rgblight_sethsv_noeeprom(HSV_RED);
+      rgblight_mode_noeeprom(RGBLIGHT_MODE_STATIC_LIGHT);
+    }
+#endif
