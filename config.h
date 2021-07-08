@@ -1,6 +1,6 @@
 /*
   Set config.h overrides.
-  See https://docs.qmk.fm/#/config_options?id=the-configh-file
+  See config.h options at https://docs.qmk.fm/#/config_options?id=the-configh-file
 */
 #pragma once
 
@@ -8,9 +8,6 @@
 #define MASTER_LEFT
 
 #define USE_SERIAL_PD2
-#define TAPPING_FORCE_HOLD
-#define TAPPING_TERM 100
-
 #define USB_SUSPEND_WAKEUP_DELAY 0
 
 /*
@@ -31,8 +28,20 @@
 #define OLED_FONT_H "keyboards/crkbd/lib/glcdfont.c"
 
 /*
+  Tabdance overides
+*/
+#undef TAPPING_TERM
+#define TAPPING_TERM 200
+
+#define TAPPING_FORCE_HOLD
+
+#define ONESHOT_TAP_TOGGLE 5
+
+#undef ONESHOT_TIMEOUT
+#define ONESHOT_TIMEOUT 5000
+
+/*
   Mouse mode overides
-  See https://beta.docs.qmk.fm/using-qmk/advanced-keycodes/feature_mouse_keys#configuring-mouse-keys
 */
 #undef MOUSEKEY_INTERVAL
 #define MOUSEKEY_INTERVAL 40
@@ -44,7 +53,7 @@
 #define MOUSEKEY_DELAY 0
 
 #undef MOUSEKEY_MAX_SPEED
-#define MOUSEKEY_MAX_SPEED 15
+#define MOUSEKEY_MAX_SPEED 14
 
 #undef MOUSEKEY_TIME_TO_MAX
 #define MOUSEKEY_TIME_TO_MAX 45
